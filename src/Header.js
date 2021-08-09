@@ -11,11 +11,11 @@ import { withAuth0 } from '@auth0/auth0-react';
 
 class Header extends React.Component {
   render() {
-    const { user, isAuthenticated } = this.props.auth0;
+    const {isAuthenticated } = this.props.auth0;
     return(
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand>My Favorite Books</Navbar.Brand>
-        <Link className="link" to="/">Home</Link>
+        <Link className="link" to="/" name="myFavoriteBooks" >Home</Link>
         <Link className="link" to="/profile">Profile</Link>
         {/* <LogoutButton/> */}
         {isAuthenticated ? <LogoutButton/> : <LoginButton/>}
