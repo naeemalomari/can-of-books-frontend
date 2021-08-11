@@ -43,6 +43,13 @@ class MyFavoriteBooks extends React.Component {
   componentDidMount() {
     this.getBooks();
   }
+  
+  componentDidUpdate(prevProps) {
+    if (this.props.booksData != prevProps.booksData) {
+      this.getData();
+    }
+  }
+
   render() {
 
     const { isAuthenticated } = this.props.auth0;

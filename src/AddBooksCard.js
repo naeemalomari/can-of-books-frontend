@@ -1,47 +1,38 @@
 import React from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
-import {Form,Button,Modal} from  'react-bootstrap/';
+import { Form, Button, Modal } from 'react-bootstrap/';
 
 class AddBooksCard extends React.Component {
 
-handleClose () {
 
-this.setState({
+  render() {
+    const { user, isAuthenticated } = this.props.auth0;
+    return (
+      <>
+        {/* <Modal show={this.props.show} onHide={this.props.handleClose}> */}
+          <Form  onSubmit={(e) => this.props.addBook(e)}>
 
-  show:true,
-})
 
-
-}
-    render() {
-        const { user, isAuthenticated } = this.props.auth0;
-        return (
-            <>
-            <Modal  show={this.props.show} onHide={this.props.handleClose}> 
-<Form>
-  <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Label name="newBook" > ADD YOUR BOOK {this.props.addBook} </Form.Label>
-    <Form.Control type="email" placeholder="Enter email" />
-    <Form.Text className="text-muted">
-      We'll never share your email with anyone else.
-    </Form.Text>
-  </Form.Group>
-
-  <Form.Group className="mb-3" controlId="formBasicPassword">
-    <Form.Label>Password</Form.Label>
-    <Form.Control type="password" placeholder="Password" />
-  </Form.Group>
-  <Form.Group className="mb-3" controlId="formBasicCheckbox">
-    <Form.Check type="checkbox" label="Check me out" />
-  </Form.Group>
-  <Button variant="primary" type="submit" onHide={this.props.handleClose}>
-    Submit
-  </Button>
-</Form>
-</Modal>
-            </>
-        );
-    }
+            <Form.Group className="mb-3" controlId="formBasic">
+              <Form.Label >Book Title </Form.Label>
+              <Form.Control type="text" placeholder="book title" name="title"/>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasic">
+              <Form.Label>description</Form.Label>
+              <Form.Control type="text" placeholder="book description" name="description"/>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasic">
+              <Form.Label>status</Form.Label>
+              <Form.Control type="text" placeholder="status" name="status"/>
+            </Form.Group>
+            <Button variant="primary" type="submit" onHide={this.handleClose}>
+              Submit
+            </Button>
+          </Form>
+        {/* </Modal> */}
+      </>
+    );
+  }
 }
 
 export default withAuth0(AddBooksCard);
