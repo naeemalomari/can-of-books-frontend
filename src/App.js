@@ -48,7 +48,7 @@ axios
 .post(`http://localhost:3001/books`,booksData)
 .then(result => {
   console.log(result.data);
-  this.setstate({
+  this.setState({
     bookData: result.data
   })
 })
@@ -60,6 +60,22 @@ axios
 show = () => {
     this.setState({
         show:true,
+    })
+  }
+  deleteBook=(idx)=>{
+    console.log(idx);
+    const { user }=this.props.auth0;
+    axios 
+    .delete(`http://localhost:3001/books/${idx}` , {params: {email:user.email}})
+    .then( result =>{
+      this.setState({
+
+        bookData: result.data
+      })
+    })
+    .catch(err => {
+
+      console.log(err);
     })
   }
   render() {
@@ -74,16 +90,13 @@ show = () => {
             addBook={this.addBook}
             // show={this.props.show}
             />
-            <Button variant="primary" type="submit" onClick={this.props.Clicking}>ADD NEW BOOK</Button>
             <Switch>
               <Route exact path="/">
                 {isAuthenticated ? <BestBooks 
-
+                 deleteBook={this.deleteBook}
                 /> : <Login />}
-                {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
               </Route>
               <Route exact path='/profile'>
-                {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
                 <Profile />
                 <MyFavoriteBooks 
                 bookData={this.state.bookData}
