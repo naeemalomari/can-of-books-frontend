@@ -15,6 +15,7 @@ class MyFavoriteBooks extends React.Component {
       status: '',
       email: '',
       image:'',
+      showUpdateBookFlag: false,
     }
   }
   getBooks = async () => {
@@ -49,7 +50,22 @@ class MyFavoriteBooks extends React.Component {
       this.getBooks();
     }
   }
+  // showUpdateBook=(index)=>{
+  //   this.setState({
+  //     showUpdateBookFlag:true
+  //     this.setState({
+        
+        
+  //     })
+  //     console.log(index);
+  //     console.log(this.state.bookData[index]);
+  //   })
+  //     }
+      updateBook = () => {
 
+
+        
+          }
   render() {
 
     const { isAuthenticated } = this.props.auth0;
@@ -75,6 +91,8 @@ class MyFavoriteBooks extends React.Component {
                       
                       <p>{item.description}</p>
                   <button onClick={()=> this.props.deleteBook(idx)}>X</button>
+                  <button onClick={()=> this.props.showUpdateBook}>UPDATE BOOK ?</button>
+
                     </Carousel.Caption>
                   </Carousel.Item>
                 );
